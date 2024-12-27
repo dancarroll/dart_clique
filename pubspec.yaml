@@ -1,6 +1,6 @@
 name: clique
 description: Implementation of the Bron–Kerbosch maximal cliques algorithm in Dart
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/dancarroll/dart_clique
 issue_tracker: https://github.com/dancarroll/dart_clique/issues
 
