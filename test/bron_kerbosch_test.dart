@@ -9,12 +9,27 @@ void main() {
       expect(graph.maximumClique(), <int>{});
     });
 
-    test('Maximum clique', () {
-      // TODO should this return empty list instead?
-      expect(graph.maximalCliques(), [<int>{}]);
+    test('Maximal cliqus', () {
+      expect(graph.maximalCliques(), []);
     });
   });
 
+  group('single item graph', () {
+    final graph = {1: <int>{}};
+
+    test('Maximum clique', () {
+      expect(graph.maximumClique(), {1});
+    });
+
+    test('Maximal cliqus', () {
+      expect(graph.maximalCliques(), [
+        {1}
+      ]);
+    });
+  });
+
+  /// Example from the Wikipedia article:
+  /// https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm#Example
   group('Wikipedia example', () {
     final graph = {
       1: {2, 5},

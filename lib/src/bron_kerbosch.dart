@@ -1,10 +1,14 @@
+/// Extension methods to perform clique operations on generic maps.
 extension BronKerbosch<T> on Map<T, Set<T>> {
   /// Returns the maximum clique found on the graph.
   ///
   /// The underyling map keys should represent vertices/nodes in the graph, and
   /// the values should represent the set of edges.
   Set<T> maximumClique() {
-    return maximalCliques().reduce(
+    final cliques = maximalCliques();
+    if (cliques.isEmpty) return {};
+
+    return cliques.reduce(
         (value, element) => (value.length > element.length) ? value : element);
   }
 
@@ -13,6 +17,8 @@ extension BronKerbosch<T> on Map<T, Set<T>> {
   /// The underyling map keys should represent vertices/nodes in the graph, and
   /// the values should represent the set of edges.
   List<Set<T>> maximalCliques() {
+    if (isEmpty) return [];
+
     List<Set<T>> cliques = [];
     _internalBronKerbosch<T>(this, {}, keys.toSet(), {}, cliques);
     return cliques;
