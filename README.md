@@ -19,6 +19,7 @@ Map<int, Set<int>> myGraph = {
 };
 
 final maximumClique = myGraph.maximumClique();
+// {1,2}
 ```
 
 ## Additional information
