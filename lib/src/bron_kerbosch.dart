@@ -26,24 +26,30 @@ extension BronKerbosch<T> on Map<T, Set<T>> {
 }
 
 /// Internal implementation of the Bron-Kerbosh pivoting algorithm.
-void _internalBronKerbosch<T>(
-    Map<T, Set<T>> graph, Set<T> r, Set<T> p, Set<T> x, List<Set<T>> cliques) {
-  if (p.isEmpty && x.isEmpty) {
-    cliques.add(r);
+/// https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm
+///
+/// Variable names have been mapped to increase their semantic value:
+/// r -> current
+/// p -> potential
+/// x -> processed
+void _internalBronKerbosch<T>(Map<T, Set<T>> graph, Set<T> current,
+    Set<T> potential, Set<T> processed, List<Set<T>> cliques) {
+  if (potential.isEmpty && processed.isEmpty) {
+    cliques.add(current);
     return;
   }
 
-  final pivot = p.union(x).first;
+  final pivot = potential.union(processed).first;
 
-  for (final vertex in p.difference(graph[pivot]!)) {
+  for (final vertex in potential.difference(graph[pivot]!)) {
     _internalBronKerbosch(
         graph,
-        r.union({vertex}),
-        p.intersection(graph[vertex]!),
-        x.intersection(graph[vertex]!),
+        current.union({vertex}),
+        potential.intersection(graph[vertex]!),
+        processed.intersection(graph[vertex]!),
         cliques);
 
-    p.remove(vertex);
-    x.add(vertex);
+    potential.remove(vertex);
+    processed.add(vertex);
   }
 }
