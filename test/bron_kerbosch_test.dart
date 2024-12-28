@@ -9,7 +9,7 @@ void main() {
       expect(graph.maximumClique(), <int>{});
     });
 
-    test('Maximal cliqus', () {
+    test('Maximal cliques', () {
       expect(graph.maximalCliques(), []);
     });
   });
@@ -21,9 +21,32 @@ void main() {
       expect(graph.maximumClique(), {1});
     });
 
-    test('Maximal cliqus', () {
+    test('Maximal cliques', () {
       expect(graph.maximalCliques(), [
         {1}
+      ]);
+    });
+  });
+
+  group('chain graph', () {
+    final graph = {
+      1: {2},
+      2: {1, 3},
+      3: {2, 4},
+      4: {3, 5},
+      5: {4},
+    };
+
+    test('Maximum clique', () {
+      expect(graph.maximumClique(), {4, 5});
+    });
+
+    test('Maximal cliques', () {
+      expect(graph.maximalCliques(), [
+        {1, 2},
+        {2, 3},
+        {3, 4},
+        {4, 5},
       ]);
     });
   });
